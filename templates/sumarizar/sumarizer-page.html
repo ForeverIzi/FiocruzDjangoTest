@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href=" {% static './styles/index.css'%}" rel="stylesheet" />
+    <link href=" {% static './styles/sumarizer-page.css'%}" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div id="logo-container">
+        <h1>LOGO</h1>
+      </div>
+      <div class="nav-options">
+        <a href="#banner">HOME</a>
+      </div>
+      <button id="hamburguer-menu">
+        <img src="{% static './icons/hamburguermenu.svg' %}" />
+      </button>
+    </nav>
+    <div id="sumaraizer-container">
+      <div id="input-container">
+        <h1>INSIRA SEU TEXTO</h1>
+        <form id="postForm" method="POST" action=".">
+          <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+          <textarea type="text" name="input" id="input-textarea"></textarea>
+          <input type="range" min="1" max="5" id="input-numero"></input>
+          <input type="submit" id="resume-btn" value="RESUMIR"></input>
+        </form>
+      </div>
+      <div id="output-container">
+        <h1>RESUMO</h1>
+        <div id="output-container-textareas">
+          <textarea id="output-textarea"> </textarea>
+          <textarea id="output-textarea2"> </textarea>
+         </div>
+        
+        <div id="output-btns">
+          <div id="copy-btn">
+            <image src="{% static './icons/copy.svg' %}"></image>
+          </div>
+          <div id="download-btn">
+            <image src="{% static './icons//arrowdown.svg'%}"></image>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-container">
+        <div></div>
+      </div>
+      <div class="line"></div>
+      <div id="copy">
+        <span>Copyright © - Sumarizador: Melhore sua produtividade</span>
+        <span>Layout por Edson Brandon.</span>
+      </div>
+    </footer>
+  </body>
+  <script src="{% static './scripts/clickToCopy.js' %}"></script>
+
+
+</html>

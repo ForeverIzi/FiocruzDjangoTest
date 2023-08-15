@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static './styles/index.css'%}" rel="stylesheet" />
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div id="logo-container">
+        <h1>LOGO</h1>
+      </div>
+      <div class="nav-options">
+        <a href="#banner">HOME</a>
+        <a href="#about">SOBRE</a>
+        <a href="#apis">API'S</a>
+        <a href="#contato">CONTATO</a>
+      </div>
+      <button id="hamburguer-menu">
+        <img src="./icons/hamburguermenu.svg" />
+      </button>
+    </nav>
+    <div class="container">
+      <section id="banner">
+        <h1>MELHORE SUA PRODUTIVIDADE!</h1>
+        <p>
+          Experimente nossa ferramenta de resumo de texto instantâneo. Deixe que
+          filtremos artigos, notícias e longos e-mails para identificar os
+          pontos principais e dar-lhe uma visão geral do conteúdo.
+        </p>
+      </section>
+      <section id="about">
+        <h1>SOBRE NÓS</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
+          placeat ex, ad id inventore facere error, animi perspiciatis, est
+          dicta quaerat asperiores dolores aspernatur fugit incidunt optio odit
+          non a. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Nesciunt placeat ex, ad id inventore facere error, animi perspiciatis,
+          est dicta quaerat asperiores dolores aspernatur fugit incidunt optio
+          odit non a. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Nesciunt placeat ex, ad id inventore facere error, animi perspiciatis,
+          est dicta quaerat asperiores dolores aspernatur fugit incidunt optio
+          odit non a
+        </p>
+      </section>
+      <section id="apis">
+        <div id="title-container">
+          <h1>NOSSAS API'S</h1>
+        </div>
+
+        <div class="apis-container">
+          <div id="apis-card">
+            <a>API</a>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae
+              esse laborum deserunt nam voluptates necessitatibus animi,
+            </p>
+            <div id="btn-api">
+              <a href="./sumarizar/sumarizer-page.html">SAIBA MAIS</a>
+            </div>
+          </div>
+          <div id="apis-card">
+            <a>API</a>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae
+              esse laborum deserunt nam voluptates necessitatibus animi,
+            </p>
+            <div id="btn-api">
+              <a href=""> SAIBA MAIS </a>
+            </div>
+          </div>
+          <div id="apis-card">
+            <a>API</a>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae
+              esse laborum deserunt nam voluptates necessitatibus animi,
+            </p>
+            <div id="btn-api">SAIBA MAIS</div>
+          </div>
+        </div>
+      </section>
+      <section id="contato">
+        <div id="contact-title">
+          <h1>FALE CONOSCO</h1>
+          <span>
+            Ficou interessado no projeto ou quer ter mais informaçôes? Entre em
+            contato.
+          </span>
+        </div>
+        <div id="contact-container">
+          <form method="POST" action="#" id="contact-form">
+            <input
+              type="text"
+              name="nome"
+              placeholder="Nome"
+              class="contact-input"
+            />
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              class="contact-input"
+            />
+            <textarea
+              type="text"
+              name="mensagem"
+              id="contact-textarea"
+              placeholder="Sua mensagem"
+            ></textarea>
+            <input id="btn-submit" type="submit" value="ENVIAR" />
+          </form>
+        </div>
+      </section>
+      <footer>
+        <div class="footer-container">
+          <div></div>
+        </div>
+        <div class="line"></div>
+        <div id="copy">
+          <span>Copyright © - Sumarizador: Melhore sua produtividade</span>
+          <span>Projetado por Davi Moura.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="{% static './scripts/script.js' %}"></script>
+</html>
