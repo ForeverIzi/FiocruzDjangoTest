@@ -5,6 +5,12 @@ import string
 import nltk
 import spacy
 
+
+import gensim
+import transformers
+
+import numpy as np
+
 nltk.download('punkt')
 nltk.download("stopwords")
 nlp = spacy.load("pt_core_news_sm")
@@ -53,17 +59,20 @@ def detect_redundancy(text):
 
 # Sumarizar texto
 def sumarize(text, quant_sentencas):
-    texto_format = format_text(text)
-    texto_pontuado = model.restore_punctuation(text)
-    freq_palavras = nltk.FreqDist(nltk.word_tokenize(texto_format))
-    freq_max = max(freq_palavras.values())
-    for palavra in freq_palavras:
-        freq_palavras[palavra] = freq_palavras[palavra] / freq_max
+    # Pré-processe o texto
+    text = nltk.sent_tokenize(text)
+    text = [nltk.word_tokenize(sentença) for sentença in text]
 
-    sentencas_txt = nltk.sent_tokenize(text)
+    # Crie um modelo de linguagem
+    model = transformers.AutoModelForSeq2SeqLM.from_pretrained("t5-base")
 
+    # Gere um resumo
+    resumo = model.generate(text)
+
+    # Classifique as sentenças do resumo
+    sentencas_resumo = nltk.sent_tokenize(resumo)
     nota_sentenca = {}
-    for sentenca in sentencas_txt:
+    for sentenca in sentencas_resumo:
         for palavra in nltk.word_tokenize(sentenca):
             if palavra in freq_palavras.keys():
                 if sentenca not in nota_sentenca:
@@ -71,11 +80,19 @@ def sumarize(text, quant_sentencas):
                 else:
                     nota_sentenca[sentenca] += freq_palavras[palavra]
 
-    melhores_sentencas = heapq.nlargest(quant_sentencas, nota_sentenca, key=nota_sentenca.get)
+        melhores_sentencas = heapq.nlargest(quant_sentencas, nota_sentenca, key=nota_sentenca.get)
+
+    # Ordene as sentenças do resumo
+    sentencas_resumo_ordenadas = order_sentences(sentencas_resumo)
+
+    # Combine o resumo do modelo com as sentenças selecionadas
     resumo = ""
-    for sentenca in sentencas_txt:
-        if sentenca in melhores_sentencas:
-            resumo += sentenca
+    for sentenca in sentencas_resumo_ordenadas:
+        resumo += sentenca
+
+    # Adicione as sentenças selecionadas pelo seu código
+    resumo += " ".join(sentenca for sentenca in sentencas_txt if sentenca in melhores_sentencas)
+            
     return resumo, sentencas_txt, melhores_sentencas
 
 # Função para calcular a quantidade de sentenças a serem mantidas no resumo
